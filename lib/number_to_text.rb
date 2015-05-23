@@ -1,6 +1,24 @@
 require 'number_to_text/version'
 
 module NumberToText
+
+  def self.convert(num)
+    number = num.to_i
+    digits = 0
+    result = ''
+
+    return 'null' if number == 0
+
+    while number > 0
+      result = (number % 1000 > 0 ? num_to_text_1000(number % 1000, digits).to_s + num_digits_to_text(digits, number % 1000 > 1).to_s : '') + result
+      number /= 1000
+      digits += 3
+    end
+
+    result.strip
+  end
+
+  private
   def self.num_to_text_10(number)
     number = number.to_i / 10
     case number
@@ -94,19 +112,4 @@ module NumberToText
     end
   end
 
-  def self.convert(num)
-    number = num.to_i
-    digits = 0
-    result = ''
-
-    return 'null' if number == 0
-
-    while number > 0
-      result = (number % 1000 > 0 ? num_to_text_1000(number % 1000, digits).to_s + num_digits_to_text(digits, number % 1000 > 1).to_s : '') + result
-      number /= 1000
-      digits += 3
-    end
-
-    result.strip
-  end
 end
