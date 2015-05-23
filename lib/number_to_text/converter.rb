@@ -1,16 +1,5 @@
 module NumberToText
-  class Converter
-    attr_reader :number, :opts
-
-    def self.convert(number, options)
-      new(number, options).execute
-    end
-
-    def initialize(number, options)
-      @number = number
-      @opts   = options
-    end
-
+  class Converter < ActiveSupport::NumberHelper::NumberConverter
     def convert # :nodoc:
       @number = Integer(number)
       digits = 0
@@ -18,7 +7,7 @@ module NumberToText
       negative = false
 
       if number < 0
-        @number = @number * (-1)
+        @number = @number.abs
         negative = true
       end
 
@@ -32,19 +21,9 @@ module NumberToText
         digits += 3
       end
 
-      if negative
-        result = 'minus ' + result
-      end
+      result = 'minus ' + result if negative
 
       result.strip
-    end
-
-    def execute
-      if !number
-        nil
-      else
-        convert
-      end
     end
 
     private

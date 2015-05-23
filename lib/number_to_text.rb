@@ -1,5 +1,8 @@
 require 'number_to_text/version'
 
+require 'active_support'
+require 'active_support/core_ext'
+
 module NumberToText
   autoload :Converter, 'number_to_text/converter'
 
