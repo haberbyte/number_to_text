@@ -15,7 +15,7 @@ module NumberToText
 
       while @number > 0
         if @number % 1000 > 0
-          result = [num_to_text_1000(number % 1000, digits), num_digits_to_text(digits, @number % 1000 > 1), result].join
+          result = [to_text_1000(number % 1000, digits), digits_to_text(digits, @number % 1000 > 1), result].join
         end
         @number /= 1000
         digits += 3
@@ -27,7 +27,7 @@ module NumberToText
     end
 
     private
-      def num_to_text_10(number)
+      def to_text_10(number)
         number = number.to_i / 10
         case number
         when 1 then 'zehn'
@@ -42,7 +42,7 @@ module NumberToText
         end
       end
 
-      def num_to_text_100(number, digits)
+      def to_text_100(number, digits)
         number = number % 100
 
         if number == 1
@@ -83,23 +83,23 @@ module NumberToText
           end
         elsif number.between?(20, 99)
           if number % 10 == 0
-            num_to_text_10(number).to_s
+            to_text_10(number).to_s
           else
-            num_to_text_100(number % 10, 1).to_s + 'und' + num_to_text_10(number).to_s
+            to_text_100(number % 10, 1).to_s + 'und' + to_text_10(number).to_s
           end
         end
       end
 
-      def num_to_text_1000(number, digits)
+      def to_text_1000(number, digits)
         if number / 100 == 0
-          num_to_text_100(number, digits).to_s
+          to_text_100(number, digits).to_s
         else
-          num_to_text_100(number / 100, 2).to_s + 'hundert' + num_to_text_100(number, digits).to_s
+          to_text_100(number / 100, 2).to_s + 'hundert' + to_text_100(number, digits).to_s
         end
       end
 
-      def num_digits_to_text(digits, mz)
-        if mz
+      def digits_to_text(digits, plural)
+        if plural
           case digits
           when 0 then return ''
           when 3 then return 'tausend'
