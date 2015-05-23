@@ -1,8 +1,8 @@
-# NumberToText
+# NumberToText [![Build Status](https://travis-ci.org/habermann24/number_to_text.svg?branch=master)](https://travis-ci.org/habermann24/number_to_text)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/number_to_text`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem converts numbers to text. This might be useful if you want to display the amount of a receipt in words.
 
-TODO: Delete this and the text above, and describe your gem
+Currently, only german output is supported. However, the goal is to provide YML language files to make this universal.
 
 ## Installation
 
@@ -22,17 +22,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+include NumberToText
 
-## Development
+>> number_to_text(123)
+=> "einhundertdreiundzwanzig"
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+>> number_to_text(1503053)
+=> "eine Million fünfhundertdreitausenddreiundfünfzig"
+```
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/number_to_text/fork )
+1. Fork it ( https://github.com/habermann24/number_to_text/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
