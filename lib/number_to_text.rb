@@ -29,12 +29,12 @@ module NumberToText
         if number == 1
           return 'eine'
         else
-         return 'ein'
-       end
+          return 'ein'
+        end
       end
     end
 
-    if (number >= 2) && (number <= 19)
+    if number.between?(2, 19)
       case number
       when 2 then return 'zwei'
       when 3 then return 'drei'
@@ -55,20 +55,20 @@ module NumberToText
       when 18 then return 'achtzehn'
       when 19 then return 'neunzehn'
       end
-    elsif (number >= 20) && (number <= 99)
+    elsif number.between?(20, 99)
       if number % 10 == 0
-        return num_to_text_10(number).to_s
+        num_to_text_10(number).to_s
       else
-        return num_to_text_100(number % 10, 1).to_s + 'und' + num_to_text_10(number).to_s
+        num_to_text_100(number % 10, 1).to_s + 'und' + num_to_text_10(number).to_s
       end
     end
   end
 
   def self.num_to_text_1000(number, digits)
     if number / 100 == 0
-      return num_to_text_100(number, digits).to_s
+      num_to_text_100(number, digits).to_s
     else
-      return num_to_text_100(number / 100, 2).to_s + 'hundert' + num_to_text_100(number, digits).to_s
+      num_to_text_100(number / 100, 2).to_s + 'hundert' + num_to_text_100(number, digits).to_s
     end
   end
 
