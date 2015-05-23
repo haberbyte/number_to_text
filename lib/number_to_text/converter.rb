@@ -15,11 +15,11 @@ module NumberToText
       @number = Integer(number)
       digits = 0
       result = ''
-      negative = 0
+      negative = false
 
       if number < 0
         @number = @number * (-1)
-        negative = 1
+        negative = true
       end
 
       return 'null' if number == 0
@@ -32,7 +32,7 @@ module NumberToText
         digits += 3
       end
 
-      if negative == 1
+      if negative
         result = 'minus ' + result
       end
 
