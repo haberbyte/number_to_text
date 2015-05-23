@@ -1,0 +1,161 @@
+AllCops:
+  Include:
+    - "**/*.rake"
+    - "**/Gemfile"
+    - "**/Rakefile"
+  Exclude:
+    - "vendor/**/*"
+    - "db/**/*"
+  RunRailsCops: true
+  StyleGuideCopsOnly: false
+
+Metrics/AbcSize:
+  Description: A calculated magnitude based on number of assignments, branches, and conditions.
+  Enabled: true
+  Max: 15
+
+Metrics/ClassLength:
+  Description: Avoid classes longer than 100 lines of code.
+  Enabled: true
+  CountComments: false
+  Max: 200
+
+Metrics/ModuleLength:
+  Description: Avoid modules longer than 100 lines of code.
+  Enabled: true
+  CountComments: false
+  Max: 200
+
+Metrics/LineLength:
+  Enabled: false
+  Max: 120
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 20
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Lint/EndAlignment:
+  AlignWith: variable
+
+Lint/AssignmentInCondition:
+  Description: Don't use assignment in conditions.
+  Enabled: false
+  AllowSafeAssignment: true
+
+Style/Documentation:
+  Description: Document classes and non-namespace modules.
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Description: Checks style of children classes and modules.
+  Enabled: false
+  EnforcedStyle: nested
+  SupportedStyles:
+    - nested
+    - compact
+
+Style/CollectionMethods:
+  Description: Preferred collection methods.
+  Enabled: true
+  PreferredMethods:
+    collect: map
+    collect!: map!
+    inject: reduce
+    detect: find
+    find_all: select
+    find: detect
+
+Style/GuardClause:
+  Enabled: false
+
+Style/SpecialGlobalVars:
+  Enabled: false
+
+Style/FormatString:
+  Enabled: false
+
+Style/IndentationConsistency:
+  EnforcedStyle: rails
+
+Style/AccessModifierIndentation:
+  EnforcedStyle: indent
+
+Style/EmptyLinesAroundAccessModifier:
+  Enabled: false
+
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Style/FileName:
+  Enabled: false
+
+Style/PredicateName:
+  Description: Check the names of predicate methods.
+  Enabled: false
+  NamePrefix:
+    - is_
+    - has_
+    - have_
+  NamePrefixBlacklist:
+    - is_
+
+Rails/ActionFilter:
+  Description: Enforces consistent use of action filter methods.
+  Enabled: true
+  EnforcedStyle: action
+  SupportedStyles:
+    - action
+    - filter
+  Include:
+    - app/controllers/**/*.rb
+
+Rails/DefaultScope:
+  Description: Checks if the argument passed to default_scope is a block.
+  Enabled: true
+  Include:
+    - app/models/**/*.rb
+
+Rails/HasAndBelongsToMany:
+  Description: Prefer has_many :through to has_and_belongs_to_many.
+  Enabled: true
+  Include:
+    - app/models/**/*.rb
+
+Rails/Output:
+  Description: Checks for calls to puts, print, etc.
+  Enabled: true
+  Include:
+    - app/**/*.rb
+    - config/**/*.rb
+    - db/**/*.rb
+    - lib/**/*.rb
+
+Rails/ReadWriteAttribute:
+  Description: Checks for read_attribute(:attr) and write_attribute(:attr, val).
+  Enabled: true
+  Include:
+    - app/models/**/*.rb
+
+Rails/ScopeArgs:
+  Description: Checks the arguments of ActiveRecord scopes.
+  Enabled: true
+  Include:
+    - app/models/**/*.rb
+
+Rails/Validation:
+  Description: Use validates :attribute, hash of validations.
+  Enabled: true
+  Include:
+    - app/models/**/*.rb
