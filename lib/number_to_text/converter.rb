@@ -4,12 +4,8 @@ module NumberToText
       @number = Integer(number)
       digits = 0
       result = ''
-      negative = false
-
-      if number < 0
-        @number = @number.abs
-        negative = true
-      end
+      negative = number < 0
+      @number = @number.abs
 
       return 'null' if number == 0
 
