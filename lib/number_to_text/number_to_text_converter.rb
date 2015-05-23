@@ -101,21 +101,21 @@ module NumberToText
       def digits_to_text(digits, plural)
         if plural
           case digits
-          when 0 then return ''
-          when 3 then return 'tausend'
-          when 6 then return ' Millionen '
-          when 9 then return ' Milliarden '
-          when 12 then return ' Billionen '
-          when 15 then return ' Billiarden '
+          when 0 then ''
+          when 3 then 'tausend'
+          when 6 then ' Millionen '
+          when 9 then ' Milliarden '
+          when 12 then ' Billionen '
+          when 15 then ' Billiarden '
           end
         else
           case digits
-          when 0 then return ''
-          when 3 then return 'tausend'
-          when 6 then return ' Million '
-          when 9 then return ' Milliarde '
-          when 12 then return ' Billion '
-          when 15 then return ' Billiarde '
+          when 0 then ''
+          when 3 then 'tausend'
+          when 6 then ' Million '
+          when 9 then ' Milliarde '
+          when 12 then ' Billion '
+          when 15 then ' Billiarde '
           end
         end
       end
