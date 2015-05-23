@@ -1,8 +1,7 @@
 require 'number_to_text/version'
 
 module NumberToText
-
-  def self.convert(num)
+  def number_to_text(num)
     number = num.to_i
     digits = 0
     result = ''
@@ -19,7 +18,8 @@ module NumberToText
   end
 
   private
-  def self.num_to_text_10(number)
+
+  def num_to_text_10(number)
     number = number.to_i / 10
     case number
     when 1 then 'zehn'
@@ -34,7 +34,7 @@ module NumberToText
     end
   end
 
-  def self.num_to_text_100(number, digits)
+  def num_to_text_100(number, digits)
     number = number % 100
 
     if number == 1
@@ -82,7 +82,7 @@ module NumberToText
     end
   end
 
-  def self.num_to_text_1000(number, digits)
+  def num_to_text_1000(number, digits)
     if number / 100 == 0
       num_to_text_100(number, digits).to_s
     else
@@ -90,7 +90,7 @@ module NumberToText
     end
   end
 
-  def self.num_digits_to_text(digits, mz)
+  def num_digits_to_text(digits, mz)
     if mz
       case digits
       when 0 then return ''
@@ -111,5 +111,4 @@ module NumberToText
       end
     end
   end
-
 end
