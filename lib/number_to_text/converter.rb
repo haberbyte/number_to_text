@@ -13,18 +13,27 @@ module NumberToText
 
     def convert # :nodoc:
       @number = Integer(number)
-
-      return 'null' if @number == 0
-
       digits = 0
       result = ''
+      negative = 0
+
+      if number < 0
+        @number = @number * (-1)
+        negative = 1
+      end
+
+      return 'null' if number == 0
 
       while @number > 0
         if @number % 1000 > 0
-          result = [to_text_1000(@number % 1000, digits), digits_to_text(digits, @number % 1000 > 1), result].join
+          result = [num_to_text_1000(number % 1000, digits), num_digits_to_text(digits, @number % 1000 > 1), result].join
         end
         @number /= 1000
         digits += 3
+      end
+
+      if negative == 1
+        result = 'minus ' + result
       end
 
       result.strip
@@ -39,9 +48,9 @@ module NumberToText
     end
 
     private
-      def to_text_10(num)
-        num = num.to_i / 10
-        case num
+      def num_to_text_10(number)
+        number = number.to_i / 10
+        case number
         when 1 then 'zehn'
         when 2 then 'zwanzig'
         when 3 then 'dreißig'
@@ -54,17 +63,17 @@ module NumberToText
         end
       end
 
-      def to_text_100(num, digits)
-        num = num % 100
+      def num_to_text_100(number, digits)
+        number = number % 100
 
-        if num == 1
+        if number == 1
           case digits
           when 0
             return 'eins'
           when 1..3
             return 'ein'
           when 6, 9, 12, 15
-            if num == 1
+            if number == 1
               return 'eine'
             else
               return 'ein'
@@ -72,8 +81,8 @@ module NumberToText
           end
         end
 
-        if num.between?(2, 19)
-          case num
+        if number.between?(2, 19)
+          case number
           when 2 then return 'zwei'
           when 3 then return 'drei'
           when 4 then return 'vier'
@@ -93,24 +102,24 @@ module NumberToText
           when 18 then return 'achtzehn'
           when 19 then return 'neunzehn'
           end
-        elsif num.between?(20, 99)
-          if num % 10 == 0
-            to_text_10(num)
+        elsif number.between?(20, 99)
+          if number % 10 == 0
+            num_to_text_10(number).to_s
           else
-            to_text_100(num % 10, 1) + 'und' + to_text_10(num)
+            num_to_text_100(number % 10, 1).to_s + 'und' + num_to_text_10(number).to_s
           end
         end
       end
 
-      def to_text_1000(num, digits)
-        if num / 100 == 0
-          to_text_100(num, digits)
+      def num_to_text_1000(number, digits)
+        if number / 100 == 0
+          num_to_text_100(number, digits).to_s
         else
-          to_text_100(num / 100, 2) + 'hundert' + to_text_100(num, digits)
+          num_to_text_100(number / 100, 2).to_s + 'hundert' + num_to_text_100(number, digits).to_s
         end
       end
 
-      def digits_to_text(digits, mz)
+      def num_digits_to_text(digits, mz)
         if mz
           case digits
           when 0 then return ''
