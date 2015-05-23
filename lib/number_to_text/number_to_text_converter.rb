@@ -1,5 +1,9 @@
+require 'active_support/number_helper'
+
 module NumberToText
-  class Converter < ActiveSupport::NumberHelper::NumberConverter
+  include ActiveSupport::NumberHelper
+
+  class NumberToTextConverter < NumberConverter
     def convert # :nodoc:
       @number = Integer(number)
       digits = 0
